@@ -161,6 +161,36 @@ func (e *engine) finishLogin(s session) {
 	})
 }
 
+type scanResult struct {
+	jobs      []job
+	usedBytes int64
+}
+
+// scan unlocks the account keys, finds the photos share and lists
+// everything to download. usedBytes is the photo volume's total size,
+// for display only.
+func (e *engine) scan(ctx context.Context) (scanResult, error) {
+	addrKRs, allAddrKR, err := unlock(ctx, e.client, e.saltedKeyPass)
+	if err != nil {
+		return scanResult{}, fmt.Errorf("unlocking keys: %w", err)
+	}
+	share, shareKR, err := photosShare(ctx, e.client, addrKRs)
+	if err != nil {
+		return scanResult{}, err
+	}
+	e.share, e.shareKR, e.addrKR = share, shareKR, allAddrKR
+
+	photos, err := listPhotos(ctx, e.st, e.client, proton.DefaultHostURL, share.VolumeID)
+	if err != nil {
+		return scanResult{}, fmt.Errorf("listing photos: %w", err)
+	}
+	vol, err := e.client.GetVolume(ctx, share.VolumeID)
+	if err != nil {
+		return scanResult{}, err
+	}
+	return scanResult{flatten(photos, 0), vol.UsedSpace}, nil
+}
+
 func unlock(ctx context.Context, client *proton.Client, saltedKeyPass []byte) (map[string]*crypto.KeyRing, *crypto.KeyRing, error) {
 	u, err := client.GetUser(ctx)
 	if err != nil {
