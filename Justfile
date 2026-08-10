@@ -36,11 +36,11 @@
 
 [doc('Build for the current platform')]
 @build:
-    go build -o photos-export .
+    go build -o dist/photos-export .
 
 [doc('Clean build and packaging artifacts')]
 @clean:
-    rm -rf photos-export dist
+    rm -rf dist
 
 # === Build ===
 
