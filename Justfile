@@ -21,6 +21,7 @@
     go vet ./...
     test -z "$(gofmt -l .)" || (gofmt -l . && exit 1)
     hadolint Dockerfile
+    actionlint -color
 
 [doc('Run tests')]
 @test:
