@@ -20,6 +20,7 @@ import (
 
 const (
 	// The API rejects requests without a known app version.
+	// Proton-API-Bridge used this identifier, so we'll use it too I guess.
 	appVersion = "macos-drive@1.0.0-alpha.1"
 
 	// The Photos section share type; go-proton-api's constants stop at 3.
