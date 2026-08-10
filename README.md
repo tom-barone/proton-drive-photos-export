@@ -12,3 +12,7 @@ As of writing the only official way to download all your photos from Proton Driv
 ## Install
 
 Downloads are on the [releases page](https://github.com/tom-barone/proton-drive-photos-export/releases).
+
+## AI Disclaimer
+
+I used Fable 5 heavily to write this project. Do with that information what you will.
