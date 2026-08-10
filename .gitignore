@@ -2,4 +2,4 @@
 photo-export
 proton-drive-photos-export
 *.app
-fyne-cross/
+dist/
