@@ -41,9 +41,18 @@
 
 # GOTOOLCHAIN=auto lets the containers fetch the Go version go.mod
 # requires; the fyne-cross images pin an older one with GOTOOLCHAIN=local.
-# Windows release mode needs a windows host, so it uses package mode.
+# Windows uses package mode because fyne's release mode for windows only
+# runs on windows hosts. The PATH shim lets fyne-cross find the
+# go.mod-pinned fyne CLI when building darwin on the host toolchain.
 
-[doc('Package the app for darwin, linux and windows (linux/windows cross-build via Docker)')]
-@package-all: package
+[doc('Package the app for darwin, linux and windows into fyne-cross/dist (needs Docker)')]
+package-all:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    shim="$(mktemp -d)"
+    printf '#!/bin/sh\nexec go tool fyne "$@"\n' > "$shim/fyne"
+    chmod +x "$shim/fyne"
+    export PATH="$shim:$PATH"
+    go tool fyne-cross darwin -arch amd64,arm64 -env GOTOOLCHAIN=auto
     go tool fyne-cross linux -arch amd64 -release -env GOTOOLCHAIN=auto
     go tool fyne-cross windows -arch amd64 -env GOTOOLCHAIN=auto

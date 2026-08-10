@@ -34,7 +34,9 @@ Download the build for your platform from the
 
 Requires [Go](https://go.dev). The fyne CLI is pinned as a tool in
 go.mod, so no extra installs are needed (`just package-all` also needs
-Docker running for the cross-builds):
+Docker running for the cross-builds; on a non-Mac host the darwin leg
+additionally needs a macOS SDK image, see `fyne-cross darwin-sdk-extract`
+and note Apple only licenses its SDK for use on Apple hardware):
 
 ```
 just run          # run from source
