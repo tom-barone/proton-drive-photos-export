@@ -19,9 +19,9 @@ import (
 )
 
 const (
-	// The API rejects requests without a known app version.
-	// Proton-API-Bridge used this identifier, so we'll use it too I guess.
-	appVersion = "macos-drive@1.0.0-alpha.1"
+	// The API rejects requests without an app version.
+	// We'll use rclone's version string, since it is a well-known third-party client.
+	appVersion = "external-drive-rclone@1.0.0-stable"
 
 	// The Photos section share type; go-proton-api's constants stop at 3.
 	shareTypePhotos = proton.ShareType(4)
