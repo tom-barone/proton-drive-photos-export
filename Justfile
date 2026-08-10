@@ -20,6 +20,7 @@
 @lint:
     go vet ./...
     test -z "$(gofmt -l .)" || (gofmt -l . && exit 1)
+    hadolint Dockerfile
 
 [doc('Run tests')]
 @test:
