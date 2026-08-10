@@ -4,7 +4,7 @@ Simple open source tool to download all your photos from Proton Drive to a local
 
 As of writing the only official way to download all your photos from Proton Drive is to manually select them in the web interface and download them. This doesn't work well when you have a lot of photos, so I wrote this tool to automate the process via the [Proton API](https://github.com/ProtonMail/go-proton-api).
 
-# Features
+## Features
 
 - Already downloaded files are skipped if you stop the app and restart it later.
 - Supports TOTP Two Factor Authentication (2FA).
