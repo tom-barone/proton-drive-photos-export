@@ -6,6 +6,8 @@ on:
 
 permissions:
   contents: write
+  id-token: write
+  attestations: write
 
 jobs:
   release:
@@ -41,6 +43,10 @@ jobs:
           (cd dist/darwin-arm64 && zip -r --symlinks ../photos-export-proton-drive-darwin-arm64.zip ./*.app)
           mv dist/linux-amd64/*.tar.xz dist/photos-export-proton-drive-linux-amd64.tar.xz
           mv dist/windows-amd64/*.exe dist/photos-export-proton-drive-windows-amd64.exe
+
+      - uses: actions/attest-build-provenance@v4
+        with:
+          subject-path: dist/photos-export-proton-drive-*
 
       - name: Upload release artifacts
         uses: softprops/action-gh-release@v2
