@@ -2,7 +2,12 @@
 
 Simple open source tool to download all your photos from Proton Drive to a local folder. This is not an official Proton product, and is not affiliated with Proton.
 
-As of writing the only official way to download all your photos from Proton Drive is to manually select them in the web interface and download them. This doesn't work well when you have a lot of photos, so I wrote this tool to automate the process via the [Proton API](https://github.com/ProtonMail/go-proton-api).
+<p align="center">
+  <img src="screenshots/sign-in.png" alt="Sign-in screen" width="400">
+  <img src="screenshots/downloading.png" alt="Downloading screen" width="400">
+</p>
+
+As of writing, the only official way to download all your photos from Proton Drive is to manually select them in the web interface and download them. This doesn't work well when you have a lot of photos, so I wrote this tool to automate the process via the [Proton API](https://github.com/ProtonMail/go-proton-api).
 
 ## Features
 
@@ -15,4 +20,4 @@ Downloads are on the [releases page](https://github.com/tom-barone/proton-drive-
 
 ## AI Disclaimer
 
-I used Fable 5 heavily to write this project. Do with that information what you will.
+I used Fable 5 to help write this project. Do with that information what you will.
