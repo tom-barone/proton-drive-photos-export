@@ -1,7 +1,3 @@
-// AI GENERATED - Tom Barone
-
-// The composition root: it wires the driven adapters into the core and
-// hands the core to the driving Fyne adapter.
 package main
 
 import (
