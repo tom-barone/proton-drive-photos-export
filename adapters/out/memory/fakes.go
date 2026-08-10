@@ -1,4 +1,3 @@
-// AI GENERATED - Tom Barone
 
 // Package memory provides in-memory fakes of Drive and Files for tests.
 package memory

@@ -1,4 +1,3 @@
-// AI GENERATED - Tom Barone
 
 // Package protondrive downloads and decrypts photos from the Proton API.
 package protondrive

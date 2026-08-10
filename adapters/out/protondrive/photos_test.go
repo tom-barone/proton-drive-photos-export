@@ -1,4 +1,3 @@
-// AI GENERATED - Tom Barone
 package protondrive
 
 import (

@@ -1,4 +1,3 @@
-// AI GENERATED - Tom Barone
 
 // Package localfs stores downloaded photos on the local disk.
 package localfs
