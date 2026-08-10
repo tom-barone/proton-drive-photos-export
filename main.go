@@ -1,32 +1,24 @@
 // AI GENERATED - Tom Barone
+
+// The composition root: it wires the driven adapters into the core and
+// hands the core to the driving Fyne adapter.
 package main
 
 import (
-	"context"
 	"log"
 	"os"
 	"path/filepath"
 
-	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/theme"
+	"github.com/tom-barone/proton-drive-photos-export/adapters/in/fynegui"
+	"github.com/tom-barone/proton-drive-photos-export/adapters/out/localfs"
+	"github.com/tom-barone/proton-drive-photos-export/adapters/out/protondrive"
+	"github.com/tom-barone/proton-drive-photos-export/core"
 )
 
 func main() {
 	setupLog()
-	a := app.NewWithID("net.tombarone.protonphotoexport")
-	a.Settings().SetTheme(&protonTheme{Theme: theme.DefaultTheme()})
-	w := a.NewWindow("Photo Export for Proton Drive")
-	w.Resize(fyne.NewSize(460, 320))
-	w.SetFixedSize(true)
-
-	ctx, cancel := context.WithCancel(context.Background())
-	u := &ui{win: w, eng: newEngine(), ctx: ctx, dir: defaultDir()}
-	w.SetOnClosed(cancel)
-
-	u.showScanning("Signing in...")
-	go u.startup()
-	w.ShowAndRun()
+	removeStaleSession()
+	fynegui.Run(core.New(protondrive.New(), localfs.Files{}))
 }
 
 // setupLog sends the standard logger to a file, since a GUI app has no
@@ -48,10 +40,11 @@ func setupLog() {
 	log.Printf("--- app start ---")
 }
 
-func defaultDir() string {
-	home, err := os.UserHomeDir()
-	if err != nil {
-		home = "."
+// removeStaleSession deletes the session file older versions cached;
+// leaving a refresh token on disk after dropping the feature would be
+// a liability.
+func removeStaleSession() {
+	if dir, err := os.UserConfigDir(); err == nil {
+		os.Remove(filepath.Join(dir, "ProtonPhotoExport", "session.json"))
 	}
-	return filepath.Join(home, "Downloads", "Proton Drive Photos")
 }
