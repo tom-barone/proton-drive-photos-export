@@ -31,7 +31,6 @@ func Run(svc in.Exporter) {
 	a.Settings().SetTheme(&protonTheme{Theme: theme.DefaultTheme()})
 	w := a.NewWindow("Photos Export for Proton Drive")
 	w.Resize(fyne.NewSize(460, 320))
-	w.SetFixedSize(true)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	w.SetOnClosed(cancel)
