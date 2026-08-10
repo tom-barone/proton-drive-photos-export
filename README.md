@@ -33,13 +33,15 @@ Download the build for your platform from the
 ## Building from source
 
 Requires [Go](https://go.dev). The fyne CLI is pinned as a tool in
-go.mod, so no extra installs are needed:
+go.mod, so no extra installs are needed (`just package-all` also needs
+Docker running for the cross-builds):
 
 ```
-just run      # run from source
-just build    # plain binary for the current platform
-just package  # installable bundle for the current platform
-just test     # run tests
+just run          # run from source
+just build        # plain binary for the current platform
+just package      # installable bundle for the current platform
+just package-all  # bundles for darwin, linux and windows
+just test         # run tests
 ```
 
 Releases are built by GitHub Actions when a `v*` tag is pushed.

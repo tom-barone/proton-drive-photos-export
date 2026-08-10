@@ -38,3 +38,12 @@
 [doc('Package the app for the current platform')]
 @package:
     go tool fyne package --release
+
+# GOTOOLCHAIN=auto lets the containers fetch the Go version go.mod
+# requires; the fyne-cross images pin an older one with GOTOOLCHAIN=local.
+# Windows release mode needs a windows host, so it uses package mode.
+
+[doc('Package the app for darwin, linux and windows (linux/windows cross-build via Docker)')]
+@package-all: package
+    go tool fyne-cross linux -arch amd64 -release -env GOTOOLCHAIN=auto
+    go tool fyne-cross windows -arch amd64 -env GOTOOLCHAIN=auto
