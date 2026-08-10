@@ -24,7 +24,8 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgl1-mesa-dev xorg-dev libxkbcommon-dev
+          sudo apt-get install -y libgl1-mesa-dev xorg-dev libxkbcommon-dev \
+            libwayland-dev wayland-protocols
           sudo wget -qO /usr/local/bin/hadolint \
             https://github.com/hadolint/hadolint/releases/download/v2.15.1/hadolint-Linux-x86_64
           sudo chmod +x /usr/local/bin/hadolint
