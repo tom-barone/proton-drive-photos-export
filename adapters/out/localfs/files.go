@@ -1,6 +1,6 @@
 // AI GENERATED - Tom Barone
 
-// Package localfs implements the out.Files port on the local disk.
+// Package localfs stores downloaded photos on the local disk.
 package localfs
 
 import (

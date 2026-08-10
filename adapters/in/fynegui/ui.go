@@ -1,7 +1,4 @@
 // AI GENERATED - Tom Barone
-
-// Package fynegui is the Fyne driving adapter: it renders the screens
-// and forwards every action to the core's in.Exporter port.
 package fynegui
 
 import (

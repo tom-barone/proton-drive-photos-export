@@ -1,6 +1,6 @@
 // AI GENERATED - Tom Barone
 
-// Package memory provides in-memory fakes of the out ports for tests.
+// Package memory provides in-memory fakes of Drive and Files for tests.
 package memory
 
 import (

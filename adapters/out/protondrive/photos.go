@@ -133,8 +133,8 @@ func flatten(photos []photo, limit int) []out.Job {
 	return jobs
 }
 
-// toJob maps a capture time of 0 to the zero time, which tells the core
-// the capture time is unknown.
+// toJob maps a capture time of 0 to the zero time, marking the capture
+// time unknown.
 func toJob(linkID string, captureTime int64) out.Job {
 	j := out.Job{LinkID: linkID}
 	if captureTime != 0 {

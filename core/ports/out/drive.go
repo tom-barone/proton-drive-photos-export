@@ -1,6 +1,4 @@
 // AI GENERATED - Tom Barone
-
-// Package out holds the core's secondary (driven) ports.
 package out
 
 import (
@@ -22,8 +20,8 @@ type FileMeta struct {
 	Active  bool // false: trashed, draft or not a file; skip it
 }
 
-// Drive is the photo-cloud port. Implementations own all transport,
-// token and cryptography concerns; the core only ever sees plaintext.
+// Drive is the photo cloud. Implementations own all transport, token
+// and cryptography concerns; callers only ever see plaintext.
 type Drive interface {
 	// SignIn starts a fresh login and reports which extra steps are
 	// needed before FinishSignIn.

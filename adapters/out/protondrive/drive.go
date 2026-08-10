@@ -1,7 +1,6 @@
 // AI GENERATED - Tom Barone
 
-// Package protondrive implements the out.Drive port against the Proton
-// API, keeping all transport, token and cryptography concerns inside.
+// Package protondrive downloads and decrypts photos from the Proton API.
 package protondrive
 
 import (
@@ -31,8 +30,8 @@ const (
 	blockPageSize = 50
 )
 
-// Drive implements out.Drive. Sign-in happens in steps mirroring the
-// port: SignIn (+ SubmitTOTP if needed) followed by FinishSignIn.
+// Drive holds the Proton session. Sign-in happens in steps: SignIn
+// (+ SubmitTOTP if needed) followed by FinishSignIn.
 type Drive struct {
 	m  *proton.Manager
 	st *authState

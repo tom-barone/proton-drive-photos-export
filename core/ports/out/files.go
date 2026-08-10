@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// Files is the local destination port.
+// Files is the local destination for downloaded photos.
 type Files interface {
 	MkdirAll(dir string) error
 	Exists(path string) bool

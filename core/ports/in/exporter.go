@@ -1,13 +1,10 @@
 // AI GENERATED - Tom Barone
-
-// Package in holds the core's primary (driving) ports.
 package in
 
 import "context"
 
-// Exporter is the app's driving port: every feature is reachable
-// headlessly through it. It is not safe for concurrent use; drive it
-// from one flow at a time.
+// Exporter is the app's full use-case API. It is not safe for
+// concurrent use; call it from one flow at a time.
 type Exporter interface {
 	// SignIn starts a fresh login and reports which extra steps are
 	// needed before FinishSignIn.

@@ -1,7 +1,3 @@
-// AI GENERATED - Tom Barone
-
-// Package core holds the technology-free application logic behind the
-// in.Exporter port. It talks to the world only through the out ports.
 package core
 
 import (
@@ -16,9 +12,9 @@ import (
 
 const workers = 4
 
-// Service implements in.Exporter. Sign-in happens in steps so a driving
-// adapter can show separate screens: SignIn (+ SubmitTOTP if needed)
-// followed by FinishSignIn.
+// Service implements in.Exporter. Sign-in happens in steps so the UI
+// can show separate screens: SignIn (+ SubmitTOTP if needed) followed
+// by FinishSignIn.
 type Service struct {
 	drive out.Drive
 	files out.Files
