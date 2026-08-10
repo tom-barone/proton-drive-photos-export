@@ -9,7 +9,7 @@ This is not an official Proton product, and is not affiliated with Proton.
   <img src="screenshots/downloading.png" alt="Downloading screen" width="400">
 </p>
 
-As of writing, the only official way to download all your photos from Proton Drive is to manually select them in the web interface and download them. This doesn't work well when you have a lot of photos, so I wrote this tool to automate the process via the [Proton API](https://github.com/ProtonMail/go-proton-api).
+As of writing, the only official way to download all your photos from Proton Drive is to manually select them in the web interface and download them. This doesn't work well when you have a lot of photos, so I wrote this tool to automate the process.
 
 ## Features
 
@@ -19,6 +19,10 @@ As of writing, the only official way to download all your photos from Proton Dri
 ## Install
 
 Downloads are on the [releases page](https://github.com/tom-barone/proton-drive-photos-export/releases).
+
+## Privacy
+
+You are authenticated with Proton via the official [Proton API](https://github.com/ProtonMail/go-proton-api), and photos are downloaded straight from Proton's servers. The app makes no other network connections.
 
 ## AI Disclaimer
 
