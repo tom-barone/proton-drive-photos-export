@@ -5,6 +5,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -16,25 +17,29 @@ import (
 )
 
 func main() {
-	setupLog()
+	logFile, err := setupLog()
+	if err != nil {
+		log.Printf("file logging disabled: %v", err)
+	} else {
+		defer logFile.Close()
+	}
 	fynegui.Run(core.New(protondrive.New(), localfs.Files{}))
 }
 
-// setupLog sends the standard logger to a file, since a GUI app has no
-// useful stderr. Best effort: on failure logs just go nowhere visible.
-func setupLog() {
+func setupLog() (*os.File, error) {
 	dir, err := os.UserCacheDir()
 	if err != nil {
-		return
+		return nil, fmt.Errorf("locating cache dir: %w", err)
 	}
 	dir = filepath.Join(dir, "ProtonPhotoExport")
 	if err := os.MkdirAll(dir, 0o755); err != nil {
-		return
+		return nil, fmt.Errorf("creating log dir %s: %w", dir, err)
 	}
-	f, err := os.OpenFile(filepath.Join(dir, "app.log"), os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0o644)
+	path := filepath.Join(dir, "app.log")
+	f, err := os.OpenFile(path, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0o644)
 	if err != nil {
-		return
+		return nil, fmt.Errorf("opening log file %s: %w", path, err)
 	}
 	log.SetOutput(f)
-	log.Printf("--- app start ---")
+	return f, nil
 }
