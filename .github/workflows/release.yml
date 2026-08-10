@@ -33,30 +33,30 @@ jobs:
       - name: Package (macOS universal)
         if: runner.os == 'macOS'
         run: |
-          CGO_ENABLED=1 GOARCH=amd64 go build -o photo-export-amd64 .
-          CGO_ENABLED=1 GOARCH=arm64 go build -o photo-export-arm64 .
-          lipo -create -output photo-export-universal photo-export-amd64 photo-export-arm64
-          go tool fyne package --os darwin --exe photo-export-universal --release
-          ditto -c -k --keepParent "Photo Export for Proton Drive.app" \
-            photo-export-proton-drive-macos-universal.zip
+          CGO_ENABLED=1 GOARCH=amd64 go build -o photos-export-amd64 .
+          CGO_ENABLED=1 GOARCH=arm64 go build -o photos-export-arm64 .
+          lipo -create -output photos-export-universal photos-export-amd64 photos-export-arm64
+          go tool fyne package --os darwin --exe photos-export-universal --release
+          ditto -c -k --keepParent "Photos Export for Proton Drive.app" \
+            photos-export-proton-drive-macos-universal.zip
 
       - name: Package (Windows)
         if: runner.os == 'Windows'
         shell: bash
         run: |
           go tool fyne package --os windows --release
-          mv "Photo Export for Proton Drive.exe" photo-export-proton-drive-windows-amd64.exe
+          mv "Photos Export for Proton Drive.exe" photos-export-proton-drive-windows-amd64.exe
 
       - name: Package (Linux)
         if: runner.os == 'Linux'
         run: |
           go tool fyne package --os linux --release
-          mv "Photo Export for Proton Drive.tar.xz" photo-export-proton-drive-linux-amd64.tar.xz
+          mv "Photos Export for Proton Drive.tar.xz" photos-export-proton-drive-linux-amd64.tar.xz
 
       - name: Upload release artifacts
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            photo-export-proton-drive-*.zip
-            photo-export-proton-drive-*.exe
-            photo-export-proton-drive-*.tar.xz
+            photos-export-proton-drive-*.zip
+            photos-export-proton-drive-*.exe
+            photos-export-proton-drive-*.tar.xz

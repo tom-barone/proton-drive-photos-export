@@ -1,6 +1,6 @@
 [Details]
 Icon = "Icon.png"
-Name = "Photo Export for Proton Drive"
-ID = "net.tombarone.protonphotoexport"
+Name = "Photos Export for Proton Drive"
+ID = "net.tombarone.protonphotosexport"
 Version = "0.1.0"
 Build = 20

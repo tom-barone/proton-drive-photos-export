@@ -1,4 +1,4 @@
-# Photo Export for Proton Drive
+# Photos Export for Proton Drive
 
 A small desktop app that downloads every photo from the Photos section
 of your Proton Drive to a local folder.
@@ -24,9 +24,9 @@ Download the build for your platform from the
 ## Notes
 
 - Your credentials go only to the Proton API. The session token is
-  cached in your user config directory (`ProtonPhotoExport/session.json`)
+  cached in your user config directory (`ProtonPhotosExport/session.json`)
   so you don't have to sign in every time.
-- Logs are written to `ProtonPhotoExport/app.log` in your user cache
+- Logs are written to `ProtonPhotosExport/app.log` in your user cache
   directory (`~/Library/Caches` on macOS, `%LocalAppData%` on Windows,
   `~/.cache` on Linux).
 

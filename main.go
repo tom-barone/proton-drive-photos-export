@@ -27,7 +27,7 @@ func setupLog() (*os.File, error) {
 	if err != nil {
 		return nil, fmt.Errorf("locating cache dir: %w", err)
 	}
-	dir = filepath.Join(dir, "ProtonPhotoExport")
+	dir = filepath.Join(dir, "ProtonPhotosExport")
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return nil, fmt.Errorf("creating log dir %s: %w", dir, err)
 	}

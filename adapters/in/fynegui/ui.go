@@ -30,9 +30,9 @@ import (
 
 // Run builds the window and runs the app until it is closed.
 func Run(svc in.Exporter) {
-	a := app.NewWithID("net.tombarone.protonphotoexport")
+	a := app.NewWithID("net.tombarone.protonphotosexport")
 	a.Settings().SetTheme(&protonTheme{Theme: theme.DefaultTheme()})
-	w := a.NewWindow("Photo Export for Proton Drive")
+	w := a.NewWindow("Photos Export for Proton Drive")
 	w.Resize(fyne.NewSize(460, 320))
 	w.SetFixedSize(true)
 
