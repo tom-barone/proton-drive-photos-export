@@ -8,11 +8,8 @@ permissions:
   contents: write
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
-    runs-on: ${{ matrix.os }}
+  release:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -20,42 +17,32 @@ jobs:
         with:
           go-version-file: go.mod
 
-      - name: Install Linux GUI build dependencies
-        if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y libgl1-mesa-dev xorg-dev libxkbcommon-dev
+      - uses: extractions/setup-just@v4
 
-      - name: Test
-        run: go test ./...
-
-      # fyne package cannot build universal macOS binaries itself, so
-      # build both architectures, merge with lipo and package the result.
-      - name: Package (macOS universal)
-        if: runner.os == 'macOS'
+      - name: Install build dependencies
         run: |
-          CGO_ENABLED=1 GOARCH=amd64 go build -o photos-export-amd64 .
-          CGO_ENABLED=1 GOARCH=arm64 go build -o photos-export-arm64 .
-          lipo -create -output photos-export-universal photos-export-amd64 photos-export-arm64
-          go tool fyne package --os darwin --exe photos-export-universal --release
-          ditto -c -k --keepParent "Photos Export for Proton Drive.app" \
-            photos-export-proton-drive-macos-universal.zip
+          sudo apt-get update
+          sudo apt-get install -y libgl1-mesa-dev xorg-dev libxkbcommon-dev
+          sudo wget -qO /usr/local/bin/hadolint \
+            https://github.com/hadolint/hadolint/releases/download/v2.15.1/hadolint-Linux-x86_64
+          sudo chmod +x /usr/local/bin/hadolint
 
-      - name: Package (Windows)
-        if: runner.os == 'Windows'
-        shell: bash
-        run: |
-          go tool fyne package --os windows --release
-          mv "Photos Export for Proton Drive.exe" photos-export-proton-drive-windows-amd64.exe
+      - run: just install
+      - run: just lint
+      - run: just test
+      - run: just build
+      - run: just package
 
-      - name: Package (Linux)
-        if: runner.os == 'Linux'
+      # The .app bundles are directories, so zip them; the rest only
+      # need release-friendly names.
+      - name: Stage release artifacts
         run: |
-          go tool fyne package --os linux --release
-          mv "Photos Export for Proton Drive.tar.xz" photos-export-proton-drive-linux-amd64.tar.xz
+          (cd dist/darwin-amd64 && zip -r --symlinks ../photos-export-proton-drive-darwin-amd64.zip ./*.app)
+          (cd dist/darwin-arm64 && zip -r --symlinks ../photos-export-proton-drive-darwin-arm64.zip ./*.app)
+          mv dist/linux-amd64/*.tar.xz dist/photos-export-proton-drive-linux-amd64.tar.xz
+          mv dist/windows-amd64/*.exe dist/photos-export-proton-drive-windows-amd64.exe
 
       - name: Upload release artifacts
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            photos-export-proton-drive-*.zip
-            photos-export-proton-drive-*.exe
-            photos-export-proton-drive-*.tar.xz
+          files: dist/photos-export-proton-drive-*
