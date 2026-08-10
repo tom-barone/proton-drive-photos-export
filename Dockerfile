@@ -1,13 +1,4 @@
-# Packages the app for darwin, linux and windows in one docker build:
-#
-#   docker build --output dist .
-#
-# Each target stage replicates what fyne-cross v1.6.3 does: run `fyne
-# package` in a fyneio/fyne-cross-images container with a zig cross
-# compiler. GOTOOLCHAIN=auto lets go fetch the version go.mod requires;
-# the images pin an older one with GOTOOLCHAIN=local. The darwin stages
-# pass -ldflags=-w to skip DWARF output, since the go linker would emit
-# it with dsymutil, which the image does not have.
+# Packages the app for darwin, linux and windows in one docker build.
 
 # Rely on the joseluisq/macosx-sdks mirror for darwin SDKs
 FROM fyneio/fyne-cross-images:darwin AS darwin-sdk
@@ -68,8 +59,6 @@ FROM fyneio/fyne-cross-images:windows AS windows-amd64
 WORKDIR /app
 COPY . .
 COPY --from=fyne-cli /usr/local/bin/fyne /usr/local/bin/fyne
-# Windows uses package mode because fyne's release mode for windows only
-# runs on windows hosts.
 ENV GOTOOLCHAIN=auto CGO_ENABLED=1 GOOS=windows GOARCH=amd64 \
     CC="zig cc -target x86_64-windows-gnu -Wdeprecated-non-prototype -Wl,--subsystem,windows" \
     CXX="zig c++ -target x86_64-windows-gnu -Wdeprecated-non-prototype -Wl,--subsystem,windows"
