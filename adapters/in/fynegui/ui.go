@@ -245,6 +245,13 @@ func (u *ui) startDownload() {
 }
 
 func (u *ui) showDownloading() {
+	bar, counts, eta := u.downloadingScreen()
+	go u.trackProgress(bar, counts, eta)
+}
+
+// downloadingScreen builds the progress screen and returns the widgets
+// the tracker updates.
+func (u *ui) downloadingScreen() (*widget.ProgressBar, *widget.Label, *widget.Label) {
 	bar := widget.NewProgressBar()
 	counts := widget.NewLabelWithStyle("Starting download...", fyne.TextAlignCenter, fyne.TextStyle{})
 	eta := widget.NewLabelWithStyle("", fyne.TextAlignCenter, fyne.TextStyle{})
@@ -261,7 +268,7 @@ func (u *ui) showDownloading() {
 		}
 	})
 	u.setScreen(counts, bar, eta, pauseBtn)
-	go u.trackProgress(bar, counts, eta)
+	return bar, counts, eta
 }
 
 // sample is one progress reading; the tracker keeps a short window of
@@ -287,18 +294,20 @@ func (u *ui) trackProgress(bar *widget.ProgressBar, counts, eta *widget.Label) {
 		if len(window) > 30 {
 			window = window[1:]
 		}
-		countText := fmt.Sprintf("Downloading %d of %d photos (%d%%)",
-			items, p.Total, 100*items/max(p.Total, 1))
-		etaText := u.rateText(p.Total, window[0], window[len(window)-1])
-		fyne.Do(func() {
-			bar.SetValue(float64(items) / float64(max(p.Total, 1)))
-			counts.SetText(countText)
-			eta.SetText(etaText)
-		})
+		first, last := window[0], window[len(window)-1]
+		fyne.Do(func() { u.updateProgress(bar, counts, eta, p.Total, first, last) })
 		if p.Total > 0 && items >= p.Total {
 			return
 		}
 	}
+}
+
+// updateProgress renders one progress reading into the widgets.
+func (u *ui) updateProgress(bar *widget.ProgressBar, counts, eta *widget.Label, total int64, first, last sample) {
+	bar.SetValue(float64(last.items) / float64(max(total, 1)))
+	counts.SetText(fmt.Sprintf("Downloading %d of %d photos (%d%%)",
+		last.items, total, 100*last.items/max(total, 1)))
+	eta.SetText(u.rateText(total, first, last))
 }
 
 func (u *ui) rateText(total int64, first, last sample) string {
