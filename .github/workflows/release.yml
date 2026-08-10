@@ -38,16 +38,16 @@ jobs:
       # need release-friendly names.
       - name: Stage release artifacts
         run: |
-          (cd dist/darwin-amd64 && zip -r --symlinks ../photos-export-proton-drive-darwin-amd64.zip ./*.app)
-          (cd dist/darwin-arm64 && zip -r --symlinks ../photos-export-proton-drive-darwin-arm64.zip ./*.app)
-          mv dist/linux-amd64/*.tar.xz dist/photos-export-proton-drive-linux-amd64.tar.xz
-          mv dist/windows-amd64/*.exe dist/photos-export-proton-drive-windows-amd64.exe
+          (cd dist/darwin-amd64 && zip -r --symlinks ../proton-drive-photos-export-darwin-amd64.zip ./*.app)
+          (cd dist/darwin-arm64 && zip -r --symlinks ../proton-drive-photos-export-darwin-arm64.zip ./*.app)
+          mv dist/linux-amd64/*.tar.xz dist/proton-drive-photos-export-linux-amd64.tar.xz
+          mv dist/windows-amd64/*.exe dist/proton-drive-photos-export-windows-amd64.exe
 
       - uses: actions/attest-build-provenance@v4
         with:
-          subject-path: dist/photos-export-proton-drive-*
+          subject-path: dist/proton-drive-photos-export-*
 
       - name: Upload release artifacts
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/photos-export-proton-drive-*
+          files: dist/proton-drive-photos-export-*
