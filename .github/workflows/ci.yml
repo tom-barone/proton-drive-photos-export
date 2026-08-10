@@ -27,4 +27,5 @@ jobs:
       - run: just lint
       - run: just test
       - run: just build
-      - run: just package
+      # Don't need to package everything on every commit
+      # - run: just package
