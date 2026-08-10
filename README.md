@@ -1,6 +1,8 @@
 # Photos Export for Proton Drive
 
-Simple open source tool to download all your photos from Proton Drive to a local folder. This is not an official Proton product, and is not affiliated with Proton.
+Simple open source tool to download all your photos from Proton Drive to a local folder.
+
+This is not an official Proton product, and is not affiliated with Proton.
 
 <p align="center">
   <img src="screenshots/sign-in.png" alt="Sign-in screen" width="400">
@@ -20,4 +22,4 @@ Downloads are on the [releases page](https://github.com/tom-barone/proton-drive-
 
 ## AI Disclaimer
 
-I used Fable 5 to help write this project. Do with that information what you will.
+I used Fable 5 to help write this. Do with that information what you will.
