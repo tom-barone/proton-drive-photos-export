@@ -3,7 +3,7 @@
     just --list
 
 [doc('Run all precommit checks')]
-@precommit: install format lint test
+@precommit: install format lint test build
 
 # === Development ===
 
