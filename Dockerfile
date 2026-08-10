@@ -1,5 +1,3 @@
-# AI GENERATED - Tom Barone
-#
 # Packages the app for darwin, linux and windows in one docker build:
 #
 #   docker build --output dist .
@@ -11,8 +9,7 @@
 # pass -ldflags=-w to skip DWARF output, since the go linker would emit
 # it with dsymutil, which the image does not have.
 
-# The darwin image ships without the macOS SDK for licensing reasons, so
-# fetch one from the joseluisq/macosx-sdks mirror, pinned by checksum.
+# Rely on the joseluisq/macosx-sdks mirror for darwin SDKs
 FROM fyneio/fyne-cross-images:darwin AS darwin-sdk
 ADD --checksum=sha256:beee7212d265a6d2867d0236cc069314b38d5fb3486a6515734e76fa210c784c https://github.com/joseluisq/macosx-sdks/releases/download/26.1/MacOSX26.1.sdk.tar.xz /
 RUN mkdir /sdk && tar -xJf /MacOSX26.1.sdk.tar.xz -C /sdk --strip-components=1
