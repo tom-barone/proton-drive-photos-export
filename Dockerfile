@@ -40,7 +40,7 @@ ENV GOTOOLCHAIN=auto CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 \
     GOFLAGS="-buildmode=pie -ldflags=-w"
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache \
-    fyne package -os darwin && mkdir /out && mv *.app /out/
+    fyne package -os darwin && mkdir /out && mv ./*.app /out/
 
 FROM fyneio/fyne-cross-images:darwin AS darwin-arm64
 WORKDIR /app
@@ -54,7 +54,7 @@ ENV GOTOOLCHAIN=auto CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 \
     GOFLAGS="-buildmode=pie -ldflags=-w"
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache \
-    fyne package -os darwin && mkdir /out && mv *.app /out/
+    fyne package -os darwin && mkdir /out && mv ./*.app /out/
 
 FROM fyneio/fyne-cross-images:linux AS linux-amd64
 WORKDIR /app
@@ -65,7 +65,7 @@ ENV GOTOOLCHAIN=auto CGO_ENABLED=1 GOOS=linux GOARCH=amd64 \
     CXX="zig c++ -target x86_64-linux-gnu.2.38 -isystem /usr/include -L/usr/lib/x86_64-linux-gnu"
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache \
-    fyne package -os linux -release && mkdir /out && mv *.tar.xz /out/
+    fyne package -os linux -release && mkdir /out && mv ./*.tar.xz /out/
 
 FROM fyneio/fyne-cross-images:windows AS windows-amd64
 WORKDIR /app
@@ -78,7 +78,7 @@ ENV GOTOOLCHAIN=auto CGO_ENABLED=1 GOOS=windows GOARCH=amd64 \
     CXX="zig c++ -target x86_64-windows-gnu -Wdeprecated-non-prototype -Wl,--subsystem,windows"
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache \
-    fyne package -os windows && mkdir /out && mv *.exe /out/
+    fyne package -os windows && mkdir /out && mv ./*.exe /out/
 
 FROM scratch
 COPY --from=darwin-amd64 /out /darwin-amd64
