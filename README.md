@@ -20,6 +20,8 @@ As of writing, the only official way to download all your photos from Proton Dri
 
 Downloads are on the [releases page](https://github.com/tom-barone/proton-drive-photos-export/releases).
 
+The macOS / Windows binaries aren't signed, so you may need to bypass some security settings to run them.
+
 ## Privacy
 
 You are authenticated with Proton via the official [Proton API](https://github.com/ProtonMail/go-proton-api), and photos are downloaded straight from Proton's servers. The app makes no other network connections.
