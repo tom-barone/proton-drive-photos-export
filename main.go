@@ -17,7 +17,6 @@ import (
 
 func main() {
 	setupLog()
-	removeStaleSession()
 	fynegui.Run(core.New(protondrive.New(), localfs.Files{}))
 }
 
@@ -38,13 +37,4 @@ func setupLog() {
 	}
 	log.SetOutput(f)
 	log.Printf("--- app start ---")
-}
-
-// removeStaleSession deletes the session file older versions cached;
-// leaving a refresh token on disk after dropping the feature would be
-// a liability.
-func removeStaleSession() {
-	if dir, err := os.UserConfigDir(); err == nil {
-		os.Remove(filepath.Join(dir, "ProtonPhotoExport", "session.json"))
-	}
 }
