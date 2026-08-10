@@ -32,14 +32,8 @@ Download the build for your platform from the
 
 ## Building from source
 
-Requires [Go](https://go.dev) and, for packaged builds, the
-[fyne CLI](https://docs.fyne.io/started/packaging):
-
-```
-go install fyne.io/tools/cmd/fyne@latest
-```
-
-Then:
+Requires [Go](https://go.dev). The fyne CLI is pinned as a tool in
+go.mod, so no extra installs are needed:
 
 ```
 just run      # run from source

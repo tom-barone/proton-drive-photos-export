@@ -25,9 +25,6 @@ jobs:
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y libgl1-mesa-dev xorg-dev libxkbcommon-dev
 
-      - name: Install the fyne CLI
-        run: go install fyne.io/tools/cmd/fyne@latest
-
       - name: Test
         run: go test ./...
 
@@ -39,7 +36,7 @@ jobs:
           CGO_ENABLED=1 GOARCH=amd64 go build -o photo-export-amd64 .
           CGO_ENABLED=1 GOARCH=arm64 go build -o photo-export-arm64 .
           lipo -create -output photo-export-universal photo-export-amd64 photo-export-arm64
-          fyne package --os darwin --exe photo-export-universal --release
+          go tool fyne package --os darwin --exe photo-export-universal --release
           ditto -c -k --keepParent "Photo Export for Proton Drive.app" \
             photo-export-proton-drive-macos-universal.zip
 
@@ -47,13 +44,13 @@ jobs:
         if: runner.os == 'Windows'
         shell: bash
         run: |
-          fyne package --os windows --release
+          go tool fyne package --os windows --release
           mv "Photo Export for Proton Drive.exe" photo-export-proton-drive-windows-amd64.exe
 
       - name: Package (Linux)
         if: runner.os == 'Linux'
         run: |
-          fyne package --os linux --release
+          go tool fyne package --os linux --release
           mv "Photo Export for Proton Drive.tar.xz" photo-export-proton-drive-linux-amd64.tar.xz
 
       - name: Upload release artifacts

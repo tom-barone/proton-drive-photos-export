@@ -35,6 +35,6 @@
 @build:
     go build -o photo-export .
 
-[doc('Package the app for the current platform (needs the fyne CLI)')]
+[doc('Package the app for the current platform')]
 @package:
-    fyne package --release
+    go tool fyne package --release
