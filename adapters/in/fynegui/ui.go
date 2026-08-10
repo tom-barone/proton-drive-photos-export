@@ -19,6 +19,7 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
+	"github.com/ncruces/zenity"
 
 	"github.com/tom-barone/proton-drive-photos-export/core"
 	"github.com/tom-barone/proton-drive-photos-export/core/ports/in"
@@ -191,18 +192,36 @@ func (u *ui) showReady() {
 	pathLabel := widget.NewLabel(u.dir)
 	pathLabel.Truncation = fyne.TextTruncateEllipsis
 	choose := widget.NewButton("Choose...", func() {
-		dialog.ShowFolderOpen(func(uri fyne.ListableURI, err error) {
-			if err != nil || uri == nil {
+		go func() {
+			path, err := zenity.SelectFile(zenity.Directory(), zenity.Filename(u.dir))
+			if err != nil {
+				if !errors.Is(err, zenity.ErrCanceled) {
+					log.Printf("folder picker: %v", err)
+					fyne.Do(func() { u.chooseFallback(pathLabel) })
+				}
 				return
 			}
-			u.dir = uri.Path()
-			pathLabel.SetText(u.dir)
-		}, u.win)
+			fyne.Do(func() {
+				u.dir = path
+				pathLabel.SetText(u.dir)
+			})
+		}()
 	})
 	folder := container.NewBorder(nil, nil, widget.NewLabel("Save to:"), choose, pathLabel)
 	dl := widget.NewButton("Download all photos", u.startDownload)
 	dl.Importance = widget.HighImportance
 	u.setScreen(found, folder, dl)
+}
+
+// chooseFallback shows Fyne's folder dialog when no native picker is available.
+func (u *ui) chooseFallback(pathLabel *widget.Label) {
+	dialog.ShowFolderOpen(func(uri fyne.ListableURI, err error) {
+		if err != nil || uri == nil {
+			return
+		}
+		u.dir = uri.Path()
+		pathLabel.SetText(u.dir)
+	}, u.win)
 }
 
 func (u *ui) startDownload() {
