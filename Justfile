@@ -30,6 +30,10 @@
 @run:
     go run .
 
+[doc('Generate app screenshots into screenshots/')]
+@screenshots:
+    SCREENSHOTS_DIR="{{ justfile_directory() }}/screenshots" go test ./adapters/in/fynegui -run '^TestScreenshots$' -count=1
+
 [doc('Build for the current platform')]
 @build:
     go build -o photos-export .
