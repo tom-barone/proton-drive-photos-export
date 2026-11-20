@@ -1,6 +1,7 @@
 package core
 
 import (
+	"path/filepath"
 	"testing"
 	"time"
 )
@@ -28,6 +29,17 @@ func TestPhotoPathCollision(t *testing.T) {
 	b := photoPath("out", "IMG_1.jpg", ts, "link2xxxx", claimed)
 	if a == b {
 		t.Fatalf("expected distinct paths, both %q", a)
+	}
+}
+
+// Given a capture time expressed in a non-UTC zone
+// When photoPath is called
+// Then the timestamp in the name is in UTC
+func TestPhotoPathUsesUTC(t *testing.T) {
+	ts := time.Date(2023, 11, 15, 5, 13, 20, 0, time.FixedZone("ICT", 7*60*60))
+	got := photoPath("out", "IMG_1.jpg", ts, "link1", map[string]string{})
+	if want := filepath.Join("out", "20231114_221320_IMG_1.jpg"); got != want {
+		t.Fatalf("got %q, want %q", got, want)
 	}
 }
 

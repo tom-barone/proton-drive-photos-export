@@ -13,7 +13,7 @@ import (
 
 var ctx = context.Background()
 
-func stamp(ts time.Time) string { return ts.Format("20060102_150405") }
+func stamp(ts time.Time) string { return ts.UTC().Format("20060102_150405") }
 
 // scanned returns a service that has already scanned the fake drive.
 func scanned(t *testing.T, d *memory.Drive, f *memory.Files) *Service {

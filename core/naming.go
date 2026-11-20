@@ -7,11 +7,13 @@ import (
 	"time"
 )
 
-// photoPath returns a deterministic destination path. If a different link
-// already claimed the same path this run, the link ID disambiguates.
+// photoPath returns a deterministic destination path. The timestamp is
+// in UTC so the name does not depend on the computer's time zone. If a
+// different link already claimed the same path this run, the link ID
+// disambiguates.
 func photoPath(dir, name string, ts time.Time, linkID string, claimed map[string]string) string {
 	name = sanitizeName(name)
-	stamp := ts.Format("20060102_150405")
+	stamp := ts.UTC().Format("20060102_150405")
 	path := filepath.Join(dir, stamp+"_"+name)
 	if owner, ok := claimed[path]; ok && owner != linkID {
 		path = filepath.Join(dir, stamp+"_"+linkID[:min(8, len(linkID))]+"_"+name)

@@ -14,6 +14,7 @@ As of writing, the only official way to download all your photos from Proton Dri
 ## Features
 
 - Already downloaded files are skipped if you stop the app and restart it later, as long as you save to the same folder. The folder is remembered between launches.
+- Files are named `YYYYMMDD_HHMMSS_<original name>`, using the capture time in UTC.
 - Supports TOTP Two Factor Authentication (2FA).
 
 ## Install
