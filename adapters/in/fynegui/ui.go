@@ -35,10 +35,14 @@ func Run(svc in.Exporter) {
 	ctx, cancel := context.WithCancel(context.Background())
 	w.SetOnClosed(cancel)
 
-	u := &ui{win: w, svc: svc, ctx: ctx, dir: defaultDir()}
+	dir := a.Preferences().StringWithFallback(dirPref, defaultDir())
+	u := &ui{win: w, svc: svc, ctx: ctx, dir: dir}
 	u.showSignIn("")
 	w.ShowAndRun()
 }
+
+// dirPref is the preferences key holding the destination folder.
+const dirPref = "dir"
 
 // ui owns the window and walks the screens:
 // SignedOut -> Scanning -> Ready -> Downloading <-> Paused -> Done.
@@ -200,10 +204,7 @@ func (u *ui) showReady() {
 				}
 				return
 			}
-			fyne.Do(func() {
-				u.dir = path
-				pathLabel.SetText(u.dir)
-			})
+			fyne.Do(func() { u.setDir(path, pathLabel) })
 		}()
 	})
 	folder := container.NewBorder(nil, nil, widget.NewLabel("Save to:"), choose, pathLabel)
@@ -218,9 +219,16 @@ func (u *ui) chooseFallback(pathLabel *widget.Label) {
 		if err != nil || uri == nil {
 			return
 		}
-		u.dir = uri.Path()
-		pathLabel.SetText(u.dir)
+		u.setDir(uri.Path(), pathLabel)
 	}, u.win)
+}
+
+// setDir switches the destination folder and remembers it for the next
+// launch.
+func (u *ui) setDir(dir string, pathLabel *widget.Label) {
+	u.dir = dir
+	fyne.CurrentApp().Preferences().SetString(dirPref, dir)
+	pathLabel.SetText(dir)
 }
 
 func (u *ui) startDownload() {

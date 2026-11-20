@@ -13,7 +13,7 @@ As of writing, the only official way to download all your photos from Proton Dri
 
 ## Features
 
-- Already downloaded files are skipped if you stop the app and restart it later.
+- Already downloaded files are skipped if you stop the app and restart it later, as long as you save to the same folder. The folder is remembered between launches.
 - Supports TOTP Two Factor Authentication (2FA).
 
 ## Install
