@@ -28,11 +28,11 @@ func setupLog() (*os.File, error) {
 		return nil, fmt.Errorf("locating cache dir: %w", err)
 	}
 	dir = filepath.Join(dir, "ProtonPhotosExport")
-	if err := os.MkdirAll(dir, 0o755); err != nil {
+	if err := os.MkdirAll(dir, 0o700); err != nil {
 		return nil, fmt.Errorf("creating log dir %s: %w", dir, err)
 	}
 	path := filepath.Join(dir, "app.log")
-	f, err := os.OpenFile(path, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0o644)
+	f, err := os.OpenFile(path, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0o600)
 	if err != nil {
 		return nil, fmt.Errorf("opening log file %s: %w", path, err)
 	}
