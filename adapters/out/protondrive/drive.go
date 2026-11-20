@@ -174,8 +174,10 @@ func (d *Drive) Stat(ctx context.Context, linkID string) (meta out.FileMeta, err
 	return out.FileMeta{Name: name, Created: time.Unix(link.CreateTime, 0), Active: true}, nil
 }
 
-// Fetch downloads, verifies and decrypts all blocks of the file's
-// active revision, streaming the plaintext to w.
+// Fetch downloads and decrypts all blocks of the file's active revision,
+// streaming the plaintext to w. Each block is checked against the hash
+// the server lists for it; block and manifest signatures are not
+// verified.
 func (d *Drive) Fetch(ctx context.Context, linkID string, w io.Writer) (err error) {
 	defer wrapErr(&err)
 	d.mu.Lock()

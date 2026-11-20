@@ -33,7 +33,7 @@ type Drive interface {
 	// library's total size in bytes.
 	ListPhotos(ctx context.Context) (jobs []Job, usedBytes int64, err error)
 	Stat(ctx context.Context, linkID string) (FileMeta, error)
-	// Fetch writes the item's verified, decrypted content to w.
+	// Fetch writes the item's decrypted content to w.
 	Fetch(ctx context.Context, linkID string, w io.Writer) error
 	// SignOut revokes the session on the server, if there is one.
 	SignOut(ctx context.Context) error
