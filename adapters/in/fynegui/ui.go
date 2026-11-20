@@ -39,6 +39,13 @@ func Run(svc in.Exporter) {
 	u := &ui{win: w, svc: svc, ctx: ctx, dir: dir}
 	u.showSignIn("")
 	w.ShowAndRun()
+
+	// Revoke the Proton session so it does not stay valid after exit.
+	sctx, stop := context.WithTimeout(context.Background(), 5*time.Second)
+	defer stop()
+	if err := svc.SignOut(sctx); err != nil {
+		log.Printf("sign out: %v", err)
+	}
 }
 
 // dirPref is the preferences key holding the destination folder.

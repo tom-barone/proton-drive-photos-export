@@ -127,6 +127,23 @@ func TestFinishSignInRetryAfterError(t *testing.T) {
 	}
 }
 
+// Given a signed-in service
+// When SignOut runs
+// Then the drive session is revoked
+func TestSignOutRevokesSession(t *testing.T) {
+	d := &memory.Drive{}
+	s := New(d, &memory.Files{})
+	if _, _, err := s.SignIn(ctx, "a@b.c", "pw"); err != nil {
+		t.Fatal(err)
+	}
+	if err := s.SignOut(ctx); err != nil {
+		t.Fatal(err)
+	}
+	if !d.SignedOut {
+		t.Fatal("drive session not revoked")
+	}
+}
+
 // Given a photo library with two items
 // When Scan runs
 // Then the photo count and library size are returned

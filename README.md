@@ -25,7 +25,7 @@ The macOS / Windows binaries aren't signed, so you may need to bypass some secur
 
 ## Privacy
 
-You are authenticated with Proton via the official [Proton API](https://github.com/ProtonMail/go-proton-api), and photos are downloaded straight from Proton's servers. The app makes no other network connections.
+You are authenticated with Proton via the official [Proton API](https://github.com/ProtonMail/go-proton-api), and photos are downloaded straight from Proton's servers. The app makes no other network connections. You are signed out of the session when you close the app.
 
 ## AI Disclaimer
 

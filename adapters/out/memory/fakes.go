@@ -26,6 +26,7 @@ type Drive struct {
 	KeyPass   []byte // captured by FinishSignIn
 	TOTP      string // captured by SubmitTOTP
 	StatCalls atomic.Int64
+	SignedOut bool // set by SignOut
 }
 
 func (d *Drive) SignIn(ctx context.Context, email, password string) (bool, bool, error) {
@@ -66,6 +67,11 @@ func (d *Drive) Stat(ctx context.Context, linkID string) (out.FileMeta, error) {
 func (d *Drive) Fetch(ctx context.Context, linkID string, w io.Writer) error {
 	_, err := w.Write(d.Content[linkID])
 	return err
+}
+
+func (d *Drive) SignOut(ctx context.Context) error {
+	d.SignedOut = true
+	return nil
 }
 
 // File is one committed write.

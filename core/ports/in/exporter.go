@@ -25,6 +25,8 @@ type Exporter interface {
 	Pause()
 	Resume()
 	Progress() Progress
+	// SignOut revokes the Proton session so it does not outlive the app.
+	SignOut(ctx context.Context) error
 }
 
 // Progress is a point-in-time snapshot of a running download.

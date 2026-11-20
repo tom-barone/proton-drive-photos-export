@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"sync"
 	"time"
 
@@ -70,6 +71,11 @@ func wrapErr(err *error) {
 
 func (d *Drive) SignIn(ctx context.Context, email, password string) (needTOTP, needMailboxPass bool, err error) {
 	defer wrapErr(&err)
+	// A retry starts a new login; revoke the old session so it does not
+	// stay live on the server.
+	if err := d.SignOut(ctx); err != nil {
+		log.Printf("revoking previous session: %v", err)
+	}
 	client, auth, err := d.m.NewClientWithLogin(ctx, email, []byte(password))
 	if err != nil {
 		return false, false, err
@@ -77,6 +83,18 @@ func (d *Drive) SignIn(ctx context.Context, email, password string) (needTOTP, n
 	d.client, d.auth = client, auth
 	return auth.TwoFA.Enabled&proton.HasTOTP != 0,
 		auth.PasswordMode == proton.TwoPasswordMode, nil
+}
+
+// SignOut revokes the session on the server. Safe to call when not
+// signed in, or twice. The client is kept so download workers still
+// winding down never see a nil client.
+func (d *Drive) SignOut(ctx context.Context) (err error) {
+	defer wrapErr(&err)
+	if d.auth.UID == "" {
+		return nil
+	}
+	d.auth = proton.Auth{}
+	return d.client.AuthDelete(ctx)
 }
 
 func (d *Drive) SubmitTOTP(ctx context.Context, code string) (err error) {

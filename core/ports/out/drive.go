@@ -35,4 +35,6 @@ type Drive interface {
 	Stat(ctx context.Context, linkID string) (FileMeta, error)
 	// Fetch writes the item's verified, decrypted content to w.
 	Fetch(ctx context.Context, linkID string, w io.Writer) error
+	// SignOut revokes the session on the server, if there is one.
+	SignOut(ctx context.Context) error
 }

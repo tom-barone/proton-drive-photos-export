@@ -150,6 +150,10 @@ func (s *Service) downloadOne(ctx context.Context, dir string, j out.Job, r *run
 	})
 }
 
+func (s *Service) SignOut(ctx context.Context) error {
+	return s.drive.SignOut(ctx)
+}
+
 func (s *Service) Pause()  { s.g.pause() }
 func (s *Service) Resume() { s.g.resume() }
 
