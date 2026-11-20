@@ -17,6 +17,10 @@ import (
 
 const photoPageSize = 500
 
+// httpClient bounds the raw listing calls; http.DefaultClient has no
+// timeout, so a stalled connection would hang the scan forever.
+var httpClient = &http.Client{Timeout: 2 * time.Minute}
+
 // authState holds the tokens used by the raw photos-endpoint calls,
 // kept current by the client's auth refresh handler.
 type authState struct {
@@ -81,7 +85,7 @@ func photosPage(ctx context.Context, st *authState, client *proton.Client, baseU
 		req.Header.Set("Authorization", "Bearer "+acc)
 		req.Header.Set("x-pm-appversion", appVersion)
 
-		resp, err := http.DefaultClient.Do(req)
+		resp, err := httpClient.Do(req)
 		if err != nil {
 			return nil, err
 		}
