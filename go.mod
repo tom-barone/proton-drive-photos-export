@@ -8,6 +8,7 @@ require (
 	fyne.io/fyne/v2 v2.8.0
 	github.com/ProtonMail/go-proton-api v0.4.1-0.20260805144911-aa74ef400fcd
 	github.com/ProtonMail/gopenpgp/v2 v2.10.0-proton
+	github.com/ncruces/zenity v0.10.15
 )
 
 require (
@@ -61,7 +62,6 @@ require (
 	github.com/mattn/go-runewidth v0.0.24 // indirect
 	github.com/mcuadros/go-version v0.0.0-20190830083331-035f6764e8d2 // indirect
 	github.com/natefinch/atomic v1.0.1 // indirect
-	github.com/ncruces/zenity v0.10.15 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
 	github.com/nicksnyder/go-i18n/v2 v2.5.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
