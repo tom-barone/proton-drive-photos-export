@@ -1,9 +1,9 @@
-fyne.io/fyne/v2 v2.8.0 h1:KNUdIk1eKsXSPy/wU6MdiR1hppAPvyzbjPbtJ8h6EUQ=
-fyne.io/fyne/v2 v2.8.0/go.mod h1:tLJK7CVtUBOnMiSDR+J88t/quiGuEhwGs09tIVM1RXg=
-fyne.io/systray v1.12.2 h1:Y8DZxgLHsVQt6rY9Zrkkg+j67S7vv/1F2viOWKPpVeA=
-fyne.io/systray v1.12.2/go.mod h1:RVwqP9nYMo7h5zViCBHri2FgjXF7H2cub7MAq4NSoLs=
-fyne.io/tools v1.7.2 h1:+uDZ3uOPVfdcOGRxzTI7uwBj7y3VRzz9qwntZ59J62M=
-fyne.io/tools v1.7.2/go.mod h1:MOPy1Z0+abfaOOyFxFqiuVuKx587jlfprGANBcOqvO0=
+fyne.io/fyne/v2 v2.8.1 h1:EztGuE2W3Qhd0cWVmU+h5rkzNezUD1To6UqsoLQYUIM=
+fyne.io/fyne/v2 v2.8.1/go.mod h1:kpeuFrClm0fiAgJYr2soTfwKMT5rzNcSKzmgGjxvHOY=
+fyne.io/systray v1.12.3-0.20260810170012-af4e8e793ec4 h1:149/+Wa5EsLLXfyj2pdTmvnQf2VIlgCIwSjcCTHYhIo=
+fyne.io/systray v1.12.3-0.20260810170012-af4e8e793ec4/go.mod h1:RVwqP9nYMo7h5zViCBHri2FgjXF7H2cub7MAq4NSoLs=
+fyne.io/tools v1.7.4 h1:3BnDP2I+EMutvWEut8J4QJnNmb+3Px8qnxXiTX3uFAE=
+fyne.io/tools v1.7.4/go.mod h1:qR7kEPTVOw5hlulFBFOXTUQilQYeyq1nzH0PeGfpyEY=
 github.com/BurntSushi/toml v1.6.0 h1:dRaEfpa2VI55EwlIW72hMRHdWouJeRF7TPYhI+AUQjk=
 github.com/BurntSushi/toml v1.6.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2lLoLwho=
 github.com/FyshOS/fancyfs v0.0.1 h1:kgvm7VvwOMLkYTqSflplp62SlMVWQ2uAoHw9CXwXHYg=
@@ -66,12 +66,8 @@ github.com/emersion/go-textwrapper v0.0.0-20200911093747-65d896831594 h1:IbFBtwo
 github.com/emersion/go-textwrapper v0.0.0-20200911093747-65d896831594/go.mod h1:aqO8z8wPrjkscevZJFVE1wXJrLpC5LtJG7fqLOsPb2U=
 github.com/emersion/go-vcard v0.0.0-20230331202150-f3d26859ccd3 h1:hQ1wTMaKcGfobYRT88RM8NFNyX+IQHvagkm/tqViU98=
 github.com/emersion/go-vcard v0.0.0-20230331202150-f3d26859ccd3/go.mod h1:HMJKR5wlh/ziNp+sHEDV2ltblO4JD2+IdDOWtGcQBTM=
-github.com/felixge/fgprof v0.9.3 h1:VvyZxILNuCiUCSXtPtYmmtGvb65nqXh2QFWc0Wpf2/g=
-github.com/felixge/fgprof v0.9.3/go.mod h1:RdbpDgzqYVh/T9fPELJyV7EYJuHB55UTEULNun8eiPw=
 github.com/fogleman/gg v1.3.0 h1:/7zJX8F6AaYQc57WQCyN9cAIz+4bCJGO9B+dyW29am8=
 github.com/fogleman/gg v1.3.0/go.mod h1:R/bRT+9gY/C5z7JzPU0zXsXHKM4/ayA+zqcVNZzPa1k=
-github.com/fredbi/uri v1.1.1 h1:xZHJC08GZNIUhbP5ImTHnt5Ya0T8FI2VAwI/37kh2Ko=
-github.com/fredbi/uri v1.1.1/go.mod h1:4+DZQ5zBjEwQCDmXW5JdIjz0PUA+yJbvtBv+u+adr5o=
 github.com/fsnotify/fsnotify v1.9.0 h1:2Ml+OJNzbYCTzsxtv8vKSFD9PbJjmhYF14k/jKC7S9k=
 github.com/fsnotify/fsnotify v1.9.0/go.mod h1:8jBTzvmWwFyi3Pb8djgCCO5IBqzKJ/Jwo8TRcHyHii0=
 github.com/fyne-io/gl-js v0.2.1-0.20260315212741-029c47fd27e8 h1:0kdPD/GEntpWmZEK5Zu/xE6Tr37jYCVDf9QP8lA/QK8=
@@ -117,8 +113,6 @@ github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0/go.mod h1:E/TSTwGw
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
 github.com/google/go-cmp v0.7.0 h1:wk8382ETsv4JYUZwIsn6YpYiWiBsYLSJiTsyBybVuN8=
 github.com/google/go-cmp v0.7.0/go.mod h1:pXiqmnSA92OHEEa9HXL2W4E7lf9JzCmGVUdgjX3N/iU=
-github.com/google/pprof v0.0.0-20211214055906-6f57359322fd h1:1FjCyPC+syAzJ5/2S8fqdZK1R22vvA0J7JZKcuOIQ7Y=
-github.com/google/pprof v0.0.0-20211214055906-6f57359322fd/go.mod h1:KgnwoLYCZ8IQu3XUZ8Nc/bM9CCZFOyjUNOSygVozoDg=
 github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
 github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/hack-pad/go-indexeddb v0.3.2 h1:DTqeJJYc1usa45Q5r52t01KhvlSN02+Oq+tQbSBI91A=
@@ -167,8 +161,6 @@ github.com/pelletier/go-toml/v2 v2.2.4 h1:mye9XuhQ6gvn5h28+VilKrrPoQVanw5PMw/TB0
 github.com/pelletier/go-toml/v2 v2.2.4/go.mod h1:2gIqNv+qfxSVS7cM2xJQKtLSTLUE9V8t9Stt+h56mCY=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
-github.com/pkg/profile v1.7.0 h1:hnbDkaNWPCLMO9wGLdBFTIZvzDrDfBM2072E1S9gJkA=
-github.com/pkg/profile v1.7.0/go.mod h1:8Uer0jas47ZQMJ7VD+OHknK4YDY07LPUC6dEvqDjvNo=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/quic-go/qpack v0.6.0 h1:g7W+BMYynC1LbYLSqRt8PBg5Tgwxn214ZZR34VIOjz8=

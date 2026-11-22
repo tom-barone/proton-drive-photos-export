@@ -5,15 +5,15 @@ go 1.26.1
 replace github.com/go-resty/resty/v2 => github.com/ProtonMail/resty/v2 v2.0.0-20250929142426-e3dc6308c80b
 
 require (
-	fyne.io/fyne/v2 v2.8.0
+	fyne.io/fyne/v2 v2.8.1
 	github.com/ProtonMail/go-proton-api v0.4.1-0.20260805144911-aa74ef400fcd
 	github.com/ProtonMail/gopenpgp/v2 v2.10.0-proton
 	github.com/ncruces/zenity v0.10.15
 )
 
 require (
-	fyne.io/systray v1.12.2 // indirect
-	fyne.io/tools v1.7.2 // indirect
+	fyne.io/systray v1.12.3-0.20260810170012-af4e8e793ec4 // indirect
+	fyne.io/tools v1.7.4 // indirect
 	github.com/BurntSushi/toml v1.6.0 // indirect
 	github.com/FyshOS/fancyfs v0.0.1 // indirect
 	github.com/ProtonMail/bcrypt v0.0.0-20211005172633-e235017c1baf // indirect
@@ -36,7 +36,6 @@ require (
 	github.com/emersion/go-textwrapper v0.0.0-20200911093747-65d896831594 // indirect
 	github.com/emersion/go-vcard v0.0.0-20230331202150-f3d26859ccd3 // indirect
 	github.com/fogleman/gg v1.3.0 // indirect
-	github.com/fredbi/uri v1.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/fyne-io/gl-js v0.2.1-0.20260315212741-029c47fd27e8 // indirect
 	github.com/fyne-io/glfw-js v0.4.0 // indirect
